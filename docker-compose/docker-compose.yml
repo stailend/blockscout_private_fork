@@ -34,10 +34,10 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: http://host.docker.internal:8545/
-        ETHEREUM_JSONRPC_TRACE_URL: http://host.docker.internal:8545/
-        ETHEREUM_JSONRPC_WS_URL: ws://host.docker.internal:8545/
-        CHAIN_ID: '1337'
+        ETHEREUM_JSONRPC_HTTP_URL: http://139.59.214.202:18545 
+        ETHEREUM_JSONRPC_TRACE_URL: http://139.59.214.202:18545 
+        ETHEREUM_JSONRPC_WS_URL: ws://139.59.214.202:18545  
+        CHAIN_ID: '4003'
 
   nft_media_handler:
     depends_on:
@@ -67,6 +67,8 @@ services:
     extends:
       file: ./services/frontend.yml
       service: frontend
+    ports:
+      - "3000:3000"
 
   stats-db-init:
     extends:
@@ -96,6 +98,16 @@ services:
     extends:
       file: ./services/user-ops-indexer.yml
       service: user-ops-indexer
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+      args:
+        RELEASE_VERSION: 8.0.0
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+    user: root
+    command: >
+      sh -c "if ! [ -e /usr/lib/x86_64-linux-gnu/libssl.so.3 ]; then apt update && apt install -y libssl3; fi && ./user-ops-indexer-server"
 
   proxy:
     depends_on:
@@ -105,3 +117,5 @@ services:
     extends:
       file: ./services/nginx.yml
       service: proxy
+    ports:
+      - "4000:4000"
