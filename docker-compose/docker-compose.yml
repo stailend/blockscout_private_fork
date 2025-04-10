@@ -34,12 +34,10 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: http://10.114.0.24:8545 
-        ETHEREUM_JSONRPC_TRACE_URL: http://10.114.0.24:8545 
-        ETHEREUM_JSONRPC_WS_URL: ws://10.114.0.24:8545  
+        ETHEREUM_JSONRPC_HTTP_URL: http://139.59.214.202:8545 
+        ETHEREUM_JSONRPC_TRACE_URL: http://139.59.214.202:8545 
+        ETHEREUM_JSONRPC_WS_URL: ws://139.59.214.202:8545  
         CHAIN_ID: '4003'
-    volumes:
-      - ../dets:/app/dets
 
   nft_media_handler:
     depends_on:

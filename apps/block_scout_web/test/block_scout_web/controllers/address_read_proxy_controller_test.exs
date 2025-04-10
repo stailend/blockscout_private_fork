@@ -2,7 +2,7 @@ defmodule BlockScoutWeb.AddressReadProxyControllerTest do
   use BlockScoutWeb.ConnCase, async: true
   use ExUnit.Case, async: false
 
-  alias Explorer.Market.Token
+  alias Explorer.ExchangeRates.Token
   alias Explorer.Chain.Address
   alias Explorer.TestHelper
 

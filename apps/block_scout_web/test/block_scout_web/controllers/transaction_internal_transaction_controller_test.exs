@@ -4,7 +4,7 @@ defmodule BlockScoutWeb.TransactionInternalTransactionControllerTest do
   import BlockScoutWeb.Routers.WebRouter.Helpers, only: [transaction_internal_transaction_path: 3]
 
   alias Explorer.Chain.InternalTransaction
-  alias Explorer.Market.Token
+  alias Explorer.ExchangeRates.Token
 
   describe "GET index/3" do
     test "with missing transaction", %{conn: conn} do

@@ -6,7 +6,7 @@ defmodule BlockScoutWeb.AddressTransactionControllerTest do
   import Mox
 
   alias Explorer.Chain.{Address, Transaction}
-  alias Explorer.Market.Token
+  alias Explorer.ExchangeRates.Token
 
   setup :verify_on_exit!
 

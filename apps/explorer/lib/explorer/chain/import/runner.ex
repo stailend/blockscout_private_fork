@@ -31,8 +31,7 @@ defmodule Explorer.Chain.Import.Runner do
           required(:params) => [map()],
           optional(:on_conflict) => on_conflict(),
           optional(:timeout) => timeout,
-          optional(:with) => changeset_function_name(),
-          optional(:fields_to_update) => [atom()]
+          optional(:with) => changeset_function_name()
         }
 
   @doc """

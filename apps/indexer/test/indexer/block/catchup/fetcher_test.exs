@@ -15,7 +15,6 @@ defmodule Indexer.Block.Catchup.FetcherTest do
   alias Indexer.Block.Catchup.MissingRangesCollector
   alias Indexer.Fetcher.CoinBalance.Catchup, as: CoinBalanceCatchup
   alias Indexer.Fetcher.{BlockReward, InternalTransaction, Token, TokenBalance, UncleBlock}
-  alias Indexer.Fetcher.OnDemand.ContractCreator, as: ContractCreatorOnDemand
 
   @moduletag capture_log: true
 
@@ -42,8 +41,6 @@ defmodule Indexer.Block.Catchup.FetcherTest do
       configuration = Application.get_env(:indexer, :last_block)
       Application.put_env(:indexer, :last_block, 0)
       Application.put_env(:indexer, Indexer.Fetcher.Celo.EpochBlockOperations.Supervisor, disabled?: true)
-
-      {:ok, _pid} = ContractCreatorOnDemand.start_link([[], []])
 
       on_exit(fn ->
         Application.put_env(:indexer, :last_block, configuration)

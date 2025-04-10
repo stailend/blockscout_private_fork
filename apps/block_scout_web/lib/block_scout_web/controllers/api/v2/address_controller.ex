@@ -145,7 +145,7 @@ defmodule BlockScoutWeb.API.V2.AddressController do
           implementations = SmartContractHelper.pre_fetch_implementations(fully_preloaded_address)
 
           CoinBalanceOnDemand.trigger_fetch(address)
-          ContractCodeOnDemand.trigger_fetch(fully_preloaded_address)
+          ContractCodeOnDemand.trigger_fetch(address)
 
           conn
           |> put_status(200)
@@ -238,7 +238,9 @@ defmodule BlockScoutWeb.API.V2.AddressController do
             address_hash
             |> Chain.fetch_last_token_balances(@api_true |> fetch_scam_token_toggle(conn))
 
-          TokenBalanceOnDemand.trigger_fetch(address_hash)
+          Task.start_link(fn ->
+            TokenBalanceOnDemand.trigger_fetch(address_hash)
+          end)
 
           conn
           |> put_status(200)
@@ -685,7 +687,9 @@ defmodule BlockScoutWeb.API.V2.AddressController do
               |> fetch_scam_token_toggle(conn)
             )
 
-          TokenBalanceOnDemand.trigger_fetch(address_hash)
+          Task.start_link(fn ->
+            TokenBalanceOnDemand.trigger_fetch(address_hash)
+          end)
 
           {tokens, next_page} = split_list_by_page(results_plus_one)
 

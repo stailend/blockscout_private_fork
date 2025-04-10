@@ -4,7 +4,7 @@ defmodule BlockScoutWeb.TransactionLogControllerTest do
   import BlockScoutWeb.Routers.WebRouter.Helpers, only: [transaction_log_path: 3]
 
   alias Explorer.Chain.Address
-  alias Explorer.Market.Token
+  alias Explorer.ExchangeRates.Token
 
   describe "GET index/2" do
     test "with invalid transaction hash", %{conn: conn} do
