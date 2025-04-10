@@ -30,13 +30,13 @@ services:
       context: ..
       dockerfile: ./docker/Dockerfile
       args:
-        RELEASE_VERSION: 8.0.0
+        RELEASE_VERSION: 7.0.2
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: http://139.59.214.202:18545 
-        ETHEREUM_JSONRPC_TRACE_URL: http://139.59.214.202:18545 
-        ETHEREUM_JSONRPC_WS_URL: ws://139.59.214.202:18545  
+        ETHEREUM_JSONRPC_HTTP_URL: http://10.114.0.24:8545 
+        ETHEREUM_JSONRPC_TRACE_URL: http://10.114.0.24:8545 
+        ETHEREUM_JSONRPC_WS_URL: ws://10.114.0.24:8545  
         CHAIN_ID: '4003'
     volumes:
       - ../dets:/app/dets
@@ -51,7 +51,7 @@ services:
       context: ..
       dockerfile: ./docker/Dockerfile
       args:
-        RELEASE_VERSION: 8.0.0
+        RELEASE_VERSION: 7.0.2
 
   visualizer:
     extends:
@@ -69,8 +69,6 @@ services:
     extends:
       file: ./services/frontend.yml
       service: frontend
-    ports:
-      - "3000:3000"
 
   stats-db-init:
     extends:
@@ -100,16 +98,6 @@ services:
     extends:
       file: ./services/user-ops-indexer.yml
       service: user-ops-indexer
-    build:
-      context: ..
-      dockerfile: ./docker/Dockerfile
-      args:
-        RELEASE_VERSION: 8.0.0
-    environment:
-      - DEBIAN_FRONTEND=noninteractive
-    user: root
-    command: >
-      sh -c "if ! [ -e /usr/lib/x86_64-linux-gnu/libssl.so.3 ]; then apt update && apt install -y libssl3; fi && ./user-ops-indexer-server"
 
   proxy:
     depends_on:
@@ -119,5 +107,3 @@ services:
     extends:
       file: ./services/nginx.yml
       service: proxy
-    ports:
-      - "4000:4000"
