@@ -38,6 +38,8 @@ services:
         ETHEREUM_JSONRPC_TRACE_URL: http://139.59.214.202:18545 
         ETHEREUM_JSONRPC_WS_URL: ws://139.59.214.202:18545  
         CHAIN_ID: '4003'
+    volumes:
+      - ../dets:/app/dets
 
   nft_media_handler:
     depends_on:
