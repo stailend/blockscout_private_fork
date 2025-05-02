@@ -12,6 +12,6 @@ services:
     env_file:
       -  ../envs/common-user-ops-indexer.env
     environment:
-      - USER_OPS_INDEXER__INDEXER__RPC_URL=${USER_OPS_INDEXER__INDEXER__RPC_URL:-http://139.59.214.202:8545/}
+      - USER_OPS_INDEXER__INDEXER__RPC_URL=${USER_OPS_INDEXER__INDEXER__RPC_URL:-http://10.114.0.24:18545/} #139.59.214.202 # localhost
       - USER_OPS_INDEXER__DATABASE__CONNECT__URL=${USER_OPS_INDEXER__DATABASE__CONNECT__URL:-postgresql://blockscout:ceWb1MeLBEeOIfk65gU8EjF8@db:5432/blockscout}
       - USER_OPS_INDEXER__DATABASE__RUN_MIGRATIONS=true
